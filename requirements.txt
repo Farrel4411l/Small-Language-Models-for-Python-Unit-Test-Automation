@@ -1,0 +1,31 @@
+# Data Engineering
+requests
+beautifulsoup4
+sqlalchemy
+psycopg2-binary
+supabase
+python-dotenv
+openai
+google-generativeai
+
+# Fine-Tuning (QLoRA & LLM)
+torch
+torchvision
+torchaudio
+transformers
+peft
+accelerate
+trl
+bitsandbytes
+datasets
+wandb
+sentencepiece
+
+# Evaluation & Testing
+pytest
+pandas
+numpy
+
+# Utils
+tqdm
+jupyter

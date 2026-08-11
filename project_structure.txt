@@ -1,0 +1,20 @@
+├── data_engineering/
+│   ├── scraper.py            # Skrip untuk mengambil raw code
+│   ├── llm_generator.py      # Skrip memanggil API LLM (GPT-4/Gemini) untuk generate tests
+│   ├── database_manager.py   # Script koneksi ke Supabase/PostgreSQL (SQLAlchemy)
+│   └── data_exporter.py      # Script export dari DB ke format .jsonl
+├── fine_tuning/
+│   ├── setup_env.sh          # Script bash untuk setup environment (opsional)
+│   ├── train_qlora.py        # Script utama untuk fine-tuning Llama-3 (SFTTrainer, peft)
+│   └── merge_weights.py      # Script untuk merge adapter LoRA ke base model
+├── evaluation/
+│   ├── inference.py          # Script untuk generate unit test dari model hasil fine-tune
+│   ├── run_tests.py          # Script otomatis menjalankan pytest via subprocess
+│   └── calculate_metrics.py  # Script menghitung pass rate & syntax error
+├── data/
+│   ├── raw/                  # Tempat menyimpan raw source code
+│   ├── processed/            # Tempat menyimpan dataset JSONL siap latih
+│   └── output/               # Tempat menyimpan hasil test model
+├── requirements.txt          # Daftar dependensi Python
+├── AI_CONTEXT.md             # Catatan konteks penelitian untuk asisten AI
+└── README.md                 # Dokumentasi umum proyek

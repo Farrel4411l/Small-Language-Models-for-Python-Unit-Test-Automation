@@ -1,0 +1,25 @@
+# Sembunyikan file rahasia
+.env
+
+# Sembunyikan folder hasil training dan model (ukurannya terlalu besar untuk GitHub)
+fine_tuning/model_qlora_pph21/
+fine_tuning/results/
+model_qlora_pph21/
+results/
+
+# Sembunyikan cache python dan testing
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Sembunyikan file output/log/notes lokal
+hasiloutput2.txt
+*.log
+
+# Sembunyikan folder data (file JSON & DB bisa sangat besar atau berisi data sensitif)
+data/raw/
+data/processed/
+data/output/
+*.db
+*.sqlite3
