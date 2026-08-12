@@ -80,9 +80,10 @@ def main():
     print("Mempersiapkan Trainer...")
     training_args = SFTConfig(
         output_dir="./fine_tuning/results",
-        per_device_train_batch_size=1,        # Batch size 1 sangat penting untuk VRAM 8GB
-        gradient_accumulation_steps=4,        # Menyimulasikan batch size 4
-        optim="paged_adamw_32bit",            # Optimizer hemat memori
+        num_train_epochs=30.0,
+        per_device_train_batch_size=1,
+        gradient_accumulation_steps=4,
+        optim="paged_adamw_32bit",
         save_steps=10,
         logging_steps=1,
         learning_rate=2e-4,
@@ -90,7 +91,6 @@ def main():
         fp16=False,
         bf16=True,                            # RTX 4070 mendukung bfloat16
         max_grad_norm=0.3,
-        max_steps=50,                         # Karena dataset kecil, kita batasi 50 step saja untuk uji coba
         warmup_steps=5,                       # Mengganti warmup_ratio dengan warmup_steps untuk kompatibilitas
         lr_scheduler_type="cosine",
         dataset_text_field="text",

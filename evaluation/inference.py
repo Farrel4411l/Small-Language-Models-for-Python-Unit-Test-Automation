@@ -43,6 +43,7 @@ class ModelInferencer:
                 **inputs,
                 max_new_tokens=2048,
                 temperature=0.1,    # Temperatur rendah agar output deterministik dan akurat
+                repetition_penalty=1.15, # Mencegah infinite loop impor library
                 do_sample=True,
                 pad_token_id=self.tokenizer.eos_token_id
             )

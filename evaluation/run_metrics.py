@@ -13,7 +13,7 @@ def load_test_cases(limit=5):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     # Mengambil sampel data secara acak.
-    cursor.execute("SELECT id, file_name, source_code FROM payroll_qa ORDER BY RANDOM() LIMIT ?", (limit,))
+    cursor.execute("SELECT id, file_name, source_code FROM payroll_qa WHERE is_synthetic = 2 ORDER BY RANDOM() LIMIT ?", (limit,))
     rows = cursor.fetchall()
     conn.close()
     
@@ -29,7 +29,7 @@ def main():
     tester = AutoTester()
     
     # 2. Ambil data pengujian
-    N_TESTS = 5
+    N_TESTS = 50
     test_cases = load_test_cases(limit=N_TESTS)
     
     passed_count = 0

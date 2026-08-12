@@ -23,3 +23,12 @@ data/processed/
 data/output/
 *.db
 *.sqlite3
+
+# Sembunyikan virtual environment
+venv/
+.venv/
+env/
+
+# Sembunyikan file sistem & IDE (VS Code, Mac)
+.vscode/
+.DS_Store
