@@ -1,27 +1,32 @@
 import sqlite3
 import time
+import argparse
+import sys
 from pathlib import Path
 from inference import ModelInferencer
 from auto_tester import AutoTester
 
-def load_test_cases(limit=5):
-    """Memuat contoh kasus dari database untuk dievaluasi."""
-    print(f"📦 Mengambil {limit} sampel data pengujian dari database SQLite...")
+def load_test_cases(split_type='test'):
+    """Mengambil sampel fungsi PPh 21 dan referensi testnya dari SQLite."""
     base_dir = Path(__file__).parent.parent
     db_path = base_dir / "data" / "processed" / "payroll_tests.db"
     
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     # Mengambil sampel data secara acak.
-    cursor.execute("SELECT id, file_name, source_code FROM payroll_qa WHERE is_synthetic = 2 ORDER BY RANDOM() LIMIT ?", (limit,))
+    cursor.execute("SELECT id, file_name, source_code FROM payroll_qa WHERE split_type = ? ORDER BY RANDOM()", (split_type,))
     rows = cursor.fetchall()
     conn.close()
     
     return rows
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--split', type=str, default='test', help="Pilih split_type: test atau ood_test")
+    args = parser.parse_args()
+    
     print("="*60)
-    print("🚀 MEMULAI FASE 3: AUTOMATED EVALUATION PIPELINE")
+    print(f"🚀 MEMULAI FASE 3: AUTOMATED EVALUATION PIPELINE (SPLIT: {args.split.upper()})")
     print("="*60)
     
     # 1. Inisialisasi Model dan Auto-Tester
@@ -29,8 +34,8 @@ def main():
     tester = AutoTester()
     
     # 2. Ambil data pengujian
-    N_TESTS = 50
-    test_cases = load_test_cases(limit=N_TESTS)
+    test_cases = load_test_cases(args.split)
+    N_TESTS = len(test_cases)
     
     passed_count = 0
     failed_count = 0

@@ -4,6 +4,7 @@ import torch
 from pathlib import Path
 from datasets import Dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainingArguments
+from transformers.trainer_utils import get_last_checkpoint
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 from trl import SFTTrainer, SFTConfig
 
@@ -19,29 +20,37 @@ def load_data_from_sqlite():
     
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    cursor.execute("SELECT source_code, generated_test FROM payroll_qa")
+    cursor.execute("SELECT source_code, generated_test, split_type FROM payroll_qa WHERE split_type IN ('train', 'val')")
     rows = cursor.fetchall()
     conn.close()
     
     # Alpaca Prompt Format
-    formatted_data = {"text": []}
-    for source_code, generated_test in rows:
+    formatted_data = {"train": {"text": []}, "val": {"text": []}}
+    for source_code, generated_test, split_type in rows:
         prompt = (
             "Below is an instruction that describes a task, paired with an input that provides further context. "
             "Write a response that appropriately completes the request.\n\n"
             "### Instruction:\n"
-            "Buat unit test menggunakan pytest untuk fungsi PPh 21 Python berikut, pastikan logika pajak tervalidasi.\n\n"
+            "Buat unit test menggunakan pytest untuk fungsi Python berikut. Gunakan representasi formula matematika murni di dalam statement assert, JANGAN gunakan hardcoded float.\n\n"
             f"### Input:\n{source_code}\n\n"
             f"### Response:\n{generated_test}"
         )
-        formatted_data["text"].append(prompt)
+        if split_type == 'train':
+            formatted_data["train"]["text"].append(prompt)
+        elif split_type == 'val':
+            formatted_data["val"]["text"].append(prompt)
         
-    return Dataset.from_dict(formatted_data)
+    return {
+        "train": Dataset.from_dict(formatted_data["train"]),
+        "val": Dataset.from_dict(formatted_data["val"])
+    }
 
 def main():
     print(f"Mempersiapkan data latih dari SQLite...")
-    dataset = load_data_from_sqlite()
-    print(f"Total data latih: {len(dataset)} pasang.")
+    datasets = load_data_from_sqlite()
+    train_dataset = datasets["train"]
+    val_dataset = datasets["val"]
+    print(f"Total data latih: {len(train_dataset)} pasang. Data validasi: {len(val_dataset)} pasang.")
     
     print("Memuat Tokenizer...")
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
@@ -84,7 +93,7 @@ def main():
         per_device_train_batch_size=1,
         gradient_accumulation_steps=4,
         optim="paged_adamw_32bit",
-        save_steps=10,
+        save_strategy="epoch",
         logging_steps=1,
         learning_rate=2e-4,
         weight_decay=0.001,
@@ -94,18 +103,30 @@ def main():
         warmup_steps=5,                       # Mengganti warmup_ratio dengan warmup_steps untuk kompatibilitas
         lr_scheduler_type="cosine",
         dataset_text_field="text",
+        eval_strategy="steps",
+        eval_steps=50,
     )
     
     trainer = SFTTrainer(
         model=model,
-        train_dataset=dataset,
+        train_dataset=train_dataset,
+        eval_dataset=val_dataset,
         peft_config=peft_config,
         processing_class=tokenizer,
         args=training_args,
     )
     
     print("🚀 Memulai proses Fine-Tuning SLM...")
-    trainer.train()
+    
+    last_checkpoint = None
+    if os.path.isdir(training_args.output_dir):
+        last_checkpoint = get_last_checkpoint(training_args.output_dir)
+        
+    if last_checkpoint is not None:
+        print(f"🔄 Checkpoint ditemukan! Melanjutkan training dari: {last_checkpoint}")
+        trainer.train(resume_from_checkpoint=last_checkpoint)
+    else:
+        trainer.train()
     
     print("Menyimpan adapter LoRA hasil latihan...")
     output_model_path = "./fine_tuning/model_qlora_pph21"
