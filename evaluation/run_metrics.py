@@ -23,14 +23,16 @@ def load_test_cases(split_type='test'):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--split', type=str, default='test', help="Pilih split_type: test atau ood_test")
+    parser.add_argument('--checkpoint', type=str, default='./fine_tuning/model_qlora_pph21', help="Path ke model checkpoint")
     args = parser.parse_args()
     
     print("="*60)
     print(f"🚀 MEMULAI FASE 3: AUTOMATED EVALUATION PIPELINE (SPLIT: {args.split.upper()})")
+    print(f"📦 CHECKPOINT: {args.checkpoint}")
     print("="*60)
     
     # 1. Inisialisasi Model dan Auto-Tester
-    inferencer = ModelInferencer()
+    inferencer = ModelInferencer(lora_path=args.checkpoint)
     tester = AutoTester()
     
     # 2. Ambil data pengujian

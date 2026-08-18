@@ -25,6 +25,7 @@ sentencepiece
 pytest
 pandas
 numpy
+matplotlib
 
 # Utils
 tqdm

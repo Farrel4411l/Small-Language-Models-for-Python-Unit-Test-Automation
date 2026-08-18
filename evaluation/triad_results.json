@@ -1,0 +1,152 @@
+{
+    "1": {
+        "ood_math": 100.0,
+        "ood_linguistic": 86.7,
+        "ood_mixed": 93.3
+    },
+    "2": {
+        "ood_math": 100.0,
+        "ood_linguistic": 100.0,
+        "ood_mixed": 100.0
+    },
+    "3": {
+        "ood_math": 100.0,
+        "ood_linguistic": 66.7,
+        "ood_mixed": 80.0
+    },
+    "4": {
+        "ood_math": 100.0,
+        "ood_linguistic": 86.7,
+        "ood_mixed": 93.3
+    },
+    "5": {
+        "ood_math": 100.0,
+        "ood_linguistic": 66.7,
+        "ood_mixed": 66.7
+    },
+    "6": {
+        "ood_math": 100.0,
+        "ood_linguistic": 93.3,
+        "ood_mixed": 93.3
+    },
+    "7": {
+        "ood_math": 100.0,
+        "ood_linguistic": 93.3,
+        "ood_mixed": 93.3
+    },
+    "8": {
+        "ood_math": 100.0,
+        "ood_linguistic": 66.7,
+        "ood_mixed": 66.7
+    },
+    "9": {
+        "ood_math": 100.0,
+        "ood_linguistic": 66.7,
+        "ood_mixed": 60.0
+    },
+    "10": {
+        "ood_math": 100.0,
+        "ood_linguistic": 66.7,
+        "ood_mixed": 66.7
+    },
+    "11": {
+        "ood_math": 100.0,
+        "ood_linguistic": 60.0,
+        "ood_mixed": 60.0
+    },
+    "12": {
+        "ood_math": 100.0,
+        "ood_linguistic": 80.0,
+        "ood_mixed": 86.7
+    },
+    "13": {
+        "ood_math": 100.0,
+        "ood_linguistic": 60.0,
+        "ood_mixed": 60.0
+    },
+    "14": {
+        "ood_math": 100.0,
+        "ood_linguistic": 66.7,
+        "ood_mixed": 66.7
+    },
+    "15": {
+        "ood_math": 8.5,
+        "ood_linguistic": 26.7,
+        "ood_mixed": 26.7
+    },
+    "16": {
+        "ood_math": 100.0,
+        "ood_linguistic": 100.0,
+        "ood_mixed": 93.3
+    },
+    "17": {
+        "ood_math": 100.0,
+        "ood_linguistic": 40.0,
+        "ood_mixed": 33.3
+    },
+    "18": {
+        "ood_math": 95.7,
+        "ood_linguistic": 93.3,
+        "ood_mixed": 60.0
+    },
+    "19": {
+        "ood_math": 100.0,
+        "ood_linguistic": 93.3,
+        "ood_mixed": 100.0
+    },
+    "20": {
+        "ood_math": 100.0,
+        "ood_linguistic": 66.7,
+        "ood_mixed": 66.7
+    },
+    "21": {
+        "ood_math": 100.0,
+        "ood_linguistic": 66.7,
+        "ood_mixed": 66.7
+    },
+    "22": {
+        "ood_math": 100.0,
+        "ood_linguistic": 46.7,
+        "ood_mixed": 66.7
+    },
+    "23": {
+        "ood_math": 100.0,
+        "ood_linguistic": 93.3,
+        "ood_mixed": 100.0
+    },
+    "24": {
+        "ood_math": 97.9,
+        "ood_linguistic": 100.0,
+        "ood_mixed": 100.0
+    },
+    "25": {
+        "ood_math": 85.1,
+        "ood_linguistic": 93.3,
+        "ood_mixed": 100.0
+    },
+    "26": {
+        "ood_math": 100.0,
+        "ood_linguistic": 80.0,
+        "ood_mixed": 93.3
+    },
+    "27": {
+        "ood_math": 97.9,
+        "ood_linguistic": 86.7,
+        "ood_mixed": 93.3
+    },
+    "28": {
+        "ood_math": 100.0,
+        "ood_linguistic": 100.0,
+        "ood_mixed": 100.0
+    },
+    "29": {
+        "ood_math": 100.0,
+        "ood_linguistic": 100.0,
+        "ood_mixed": 100.0
+    },
+    "30": {
+        "ood_math": 100.0,
+        "ood_linguistic": 100.0,
+        "ood_mixed": 100.0
+    }
+}

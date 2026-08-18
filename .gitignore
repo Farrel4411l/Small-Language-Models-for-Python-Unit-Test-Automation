@@ -4,8 +4,10 @@
 # Sembunyikan folder hasil training dan model (ukurannya terlalu besar untuk GitHub)
 fine_tuning/model_qlora_pph21/
 fine_tuning/results/
+fine_tuning/results_guardrails/
 model_qlora_pph21/
 results/
+results_guardrails/
 
 # Sembunyikan cache python dan testing
 __pycache__/

@@ -31,9 +31,10 @@ class ModelInferencer:
             "Below is an instruction that describes a task, paired with an input that provides further context. "
             "Write a response that appropriately completes the request.\n\n"
             "### Instruction:\n"
-            "Buat unit test menggunakan pytest untuk fungsi PPh 21 Python berikut, pastikan logika pajak tervalidasi.\n\n"
+            "SYSTEM RULE: Anda adalah mesin generator kode murni. Anda DILARANG KERAS merespons dengan narasi, percakapan, puisi, atau teks selain kode Python. Kegagalan mematuhi ini akan menyebabkan sistem crash.\n\n"
+            "Buat unit test menggunakan pytest untuk fungsi PPh 21 Python berikut.\n\n"
             f"### Input:\n{source_code}\n\n"
-            "### Response:\n"
+            "### Response:\n```python\n"
         )
         
         inputs = self.tokenizer(prompt, return_tensors="pt").to("cuda")
@@ -51,5 +52,8 @@ class ModelInferencer:
         # Potong prompt dari output agar kita hanya mendapatkan respons aslinya
         input_length = inputs.input_ids.shape[1]
         generated_tokens = outputs[0][input_length:]
-        response = self.tokenizer.decode(generated_tokens, skip_special_tokens=True)
+        response_text = self.tokenizer.decode(generated_tokens, skip_special_tokens=True)
+        
+        # Karena kita melakukan forced prefix "```python\n", kita tambahkan kembali ke output
+        response = "```python\n" + response_text
         return response
