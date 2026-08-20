@@ -32,7 +32,8 @@ def main():
     print("="*60)
     
     # 1. Inisialisasi Model dan Auto-Tester
-    inferencer = ModelInferencer(lora_path=args.checkpoint)
+    lora_path = None if args.checkpoint.upper() == "NONE" else args.checkpoint
+    inferencer = ModelInferencer(lora_path=lora_path)
     tester = AutoTester()
     
     # 2. Ambil data pengujian

@@ -21,8 +21,13 @@ class ModelInferencer:
             device_map="auto"
         )
         
-        print(f"🛠️ Menyuntikkan adapter LoRA dari {lora_path}...")
-        self.model = PeftModel.from_pretrained(base_model, lora_path)
+        if lora_path:
+            print(f"🛠️ Menyuntikkan adapter LoRA dari {lora_path}...")
+            self.model = PeftModel.from_pretrained(base_model, lora_path)
+        else:
+            print("⚠️ Menjalankan BASE MODEL Murni (Tanpa LoRA) untuk Ablation Study...")
+            self.model = base_model
+            
         self.model.eval()
         print("✅ Model siap untuk Inference!")
 
@@ -57,3 +62,29 @@ class ModelInferencer:
         # Karena kita melakukan forced prefix "```python\n", kita tambahkan kembali ke output
         response = "```python\n" + response_text
         return response
+
+    def generate_general(self, prompt_text):
+        prompt = (
+            "Below is an instruction that describes a task. "
+            "Write a response that appropriately completes the request.\n\n"
+            "### Instruction:\n"
+            f"{prompt_text}\n\n"
+            "### Response:\n"
+        )
+        
+        inputs = self.tokenizer(prompt, return_tensors="pt").to("cuda")
+        
+        with torch.no_grad():
+            outputs = self.model.generate(
+                **inputs,
+                max_new_tokens=512,
+                temperature=0.1,
+                repetition_penalty=1.15,
+                do_sample=True,
+                pad_token_id=self.tokenizer.eos_token_id
+            )
+            
+        input_length = inputs.input_ids.shape[1]
+        generated_tokens = outputs[0][input_length:]
+        response_text = self.tokenizer.decode(generated_tokens, skip_special_tokens=True)
+        return response_text
