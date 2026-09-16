@@ -19,6 +19,7 @@ error_msg = ""
 try:
     sys.path.append(os.path.dirname(os.path.abspath(__file__)))
     from evaluation.inference import ModelInferencer
+    from rag_system.orchestrator import TaxOrchestrator
 
     HAS_GPU = torch.cuda.is_available()
     if not HAS_GPU:
@@ -99,8 +100,9 @@ with tab_chat:
             with st.spinner("Model is thinking..."):
                 if model:
                     try:
-                        # Invoke local model
-                        full_response = model.generate_general(prompt)
+                        # Invoke orchestrator pipeline
+                        orchestrator = TaxOrchestrator()
+                        full_response = orchestrator.process_chat(prompt, model)
                     except Exception as e:
                         full_response = (
                             f"An error occurred while processing the model: {e}"
