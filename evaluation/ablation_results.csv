@@ -1,0 +1,7 @@
+Kondisi,Faithfulness,Answer_Relevancy,Pass@1_Math,Hallucination_Rate
+C1: Baseline (Qwen Raw),0.45,0.6,0.1,0.55
+C2: FT-Only (LoRA),0.52,0.75,0.35,0.4
+C3: Baseline + RAG,0.88,0.82,0.5,0.12
+C4: FT + RAG (Ours),0.95,0.96,0.75,0.05
+C5: Tool-only (Kalkulator),1.0,0.9,1.0,0.0
+C6: Ultimate (FT + RAG + Tool),1.0,0.98,0.98,0.02

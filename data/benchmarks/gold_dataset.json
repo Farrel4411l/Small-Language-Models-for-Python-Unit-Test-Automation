@@ -1,0 +1,16 @@
+[
+    {
+        "question": "Seorang pegawai tetap belum menikah tanpa tanggungan (TK/0) menerima gaji Rp10.000.000 sebulan. Berapa PPh Pasal 21 yang dipotong jika menggunakan TER berdasarkan PP 58/2023?",
+        "ground_truth_context": [
+            "Tarif efektif rata-rata (TER)... kategori A..."
+        ],
+        "expected_answer": "Berdasarkan PP 58/2023 Pasal 1 dan tabel TER Kategori A, tarif untuk penghasilan bruto Rp10.000.000 dengan status TK/0 adalah 2%. Maka PPh Pasal 21 = 2% x Rp10.000.000 = Rp200.000."
+    },
+    {
+        "question": "Berapa besarnya PTKP untuk wajib pajak kawin dengan 2 anak (K/2)?",
+        "ground_truth_context": [
+            "PMK 101/2016 Pasal 1..."
+        ],
+        "expected_answer": "Berdasarkan PMK 101/2016, PTKP diri sendiri Rp54.000.000, tambahan kawin Rp4.500.000, dan 2 tanggungan (2 x Rp4.500.000 = Rp9.000.000). Total PTKP K/2 adalah Rp67.500.000."
+    }
+]

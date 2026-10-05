@@ -34,3 +34,5 @@ env/
 # Sembunyikan file sistem & IDE (VS Code, Mac)
 .vscode/
 .DS_Store
+data/vector_db/
+data/processed_chunks/

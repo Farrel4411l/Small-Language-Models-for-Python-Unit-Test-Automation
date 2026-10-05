@@ -30,3 +30,12 @@ matplotlib
 # Utils
 tqdm
 jupyter
+
+# RAG System
+chromadb
+pymupdf4llm
+langchain
+FlagEmbedding
+sentence-transformers
+rank_bm25
+ragas

@@ -14,6 +14,22 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# === ABLATION STUDY SELECTION (C1 - C6) ===
+st.sidebar.title("⚙️ Arsitektur RAG")
+st.sidebar.markdown("Pilih kondisi eksperimen (Ablation Study) yang ingin Anda demonstrasikan:")
+
+c_options = {
+    "C1: Baseline (Qwen Raw)": "Model Qwen dasar tanpa modifikasi apa pun. Sangat rawan halusinasi regulasi pajak.",
+    "C2: FT-Only (LoRA)": "Model yang sudah di-finetune (Kondisi lama). Pintar menulis *pytest*, tapi menghafal pajak sehingga sering salah hitung.",
+    "C3: Baseline + RAG": "Qwen mentah yang diberi asupan teks hukum perpajakan asli (PMK/UU).",
+    "C4: FT + RAG (Ours)": "Model pintar coding + asupan teks hukum faktual. Ini adalah **novelty riset kita**, menurunkan halusinasi secara drastis.",
+    "C5: Tool-only (Kalkulator)": "Kalkulator deterministik konvensional (Hardcoded Python) tanpa *reasoning* AI.",
+    "C6: Ultimate (FT + RAG + Tool)": "Sistem pamungkas! Kombinasi dari bahasa luwes SLM, konteks hukum faktual (RAG), dan kalkulasi akurat (Python Tool)."
+}
+
+selected_c = st.sidebar.radio("Pilih Kondisi (C1 - C6):", list(c_options.keys()), index=5)
+st.sidebar.success(f"**Info {selected_c.split(':')[0]}:**\n{c_options[selected_c]}")
+
 # Attempt to import ModelInferencer (Only when running locally with GPU support)
 error_msg = ""
 try:
@@ -110,13 +126,13 @@ with tab_chat:
                 else:
                     # Fallback simulation for non-GPU hosting
                     time.sleep(2)
-                    full_response = """
+                    full_response = f"""
 ```python
 def hitung_pajak(gaji):
-    # (Simulated response: Running in an environment without GPU acceleration)
+    # (Peringatan: Berjalan tanpa GPU - Hanya menampilkan struktur fungsi)
     pass
 ```
-*Note: You are accessing the web version without GPU. Clone this repository and run locally for real AI inference!*
+*Note: Anda menjalankan Arsitektur **{selected_c.split(':')[0]}** tanpa GPU. Silakan jalankan secara lokal menggunakan GPU untuk mendapatkan output inference asli dari Qwen2.5!*
 """
 
             message_placeholder.markdown(full_response)
