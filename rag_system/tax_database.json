@@ -4488,5 +4488,6 @@
                 "rate": 0.347
             }
         ]
-    }
+    },
+    "_COMMENT": "Tool-only baseline, NOT part of RAG"
 }

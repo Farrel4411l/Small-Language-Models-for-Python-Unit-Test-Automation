@@ -36,3 +36,5 @@ env/
 .DS_Store
 data/vector_db/
 data/processed_chunks/
+
+venv_gpu/

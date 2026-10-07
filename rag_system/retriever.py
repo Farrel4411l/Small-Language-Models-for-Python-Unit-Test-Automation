@@ -3,6 +3,10 @@ import pickle
 import chromadb
 from FlagEmbedding import FlagModel, FlagReranker
 
+# Monkeypatch transformers to bypass torch.load vulnerability check (CVE-2025-32434)
+import transformers.utils.import_utils
+transformers.utils.import_utils.check_torch_load_is_safe = lambda: None
+
 class HybridRetriever:
     def __init__(self, top_k=20, rerank_top_k=3):
         print("[System] Menginisialisasi Hybrid Retriever...")

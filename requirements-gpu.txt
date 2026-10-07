@@ -1,0 +1,19 @@
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch
+torchvision
+torchaudio
+transformers
+peft
+accelerate
+bitsandbytes
+chromadb
+ragas
+datasets
+FlagEmbedding
+rank_bm25
+pymupdf4llm
+tqdm
+pandas
+matplotlib
+streamlit
+numpy<2.0.0

@@ -3,6 +3,9 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
 
+# Fix seed for reproducibility in generation
+torch.manual_seed(42)
+
 class RAGGenerator:
     def __init__(self, base_model_id="Qwen/Qwen2.5-7B-Instruct", lora_path=None):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"

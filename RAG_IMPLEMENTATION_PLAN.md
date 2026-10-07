@@ -41,18 +41,18 @@ Fokus: Integrasi Prompt RAG dengan Model Qwen2.5-7B.
 - [x] **3.4** Penggabungan dengan Adapter LoRA Qwen yang sudah di-*fine-tune*.
 
 ### Fase 4: Evaluation Matrix (Q1 Focus)
-Fokus: Pembuktian Ilmiah terhadap 6 Kondisi.
-- [x] **4.1** Evaluasi C1 (Baseline Qwen).
-- [x] **4.2** Evaluasi C2 (FT-Only, *Current State*).
-- [x] **4.3** Evaluasi C3 (Qwen Raw + RAG).
-- [x] **4.4** Evaluasi C4 (FT + RAG) -> *Novelty Utama*.
-- [x] **4.5** Evaluasi C5 (Tool-only) & C6 (Ultimate).
-- [x] **4.6** Eksekusi evaluasi metrik RAGAS (Faithfulness) secara lokal.
+Fokus: Pembuktian Ilmiah terhadap 6 Kondisi (Harus dijalankan dengan model asli di GPU).
+- [ ] **4.1** Evaluasi C1 (Baseline Qwen).
+- [ ] **4.2** Evaluasi C2 (FT-Only, *Current State*).
+- [ ] **4.3** Evaluasi C3 (Qwen Raw + RAG).
+- [ ] **4.4** Evaluasi C4 (FT + RAG) -> *Novelty Utama*.
+- [ ] **4.5** Evaluasi C5 (Tool-only) & C6 (Ultimate).
+- [ ] **4.6** Eksekusi evaluasi metrik RAGAS (Faithfulness) secara lokal.
 
 ### Fase 5: Ablation Studies & Paper Writing
-- [x] **5.1** *Ablation:* Kinerja Retriever (Dense vs Sparse vs Hybrid).
-- [x] **5.2** *Ablation:* Jumlah *k* (1, 3, 5, 10).
-- [x] **5.3** Draft Paper, Pembuatan Grafik Matplotlib beresolusi tinggi, Penyusunan *Methodology*.
+- [ ] **5.1** *Ablation:* Kinerja Retriever (Dense vs Sparse vs Hybrid) menggunakan Recall@3.
+- [ ] **5.2** *Ablation:* Jumlah *k* (1, 3, 5, 10).
+- [ ] **5.3** Draft Paper, Pembuatan Grafik Matplotlib beresolusi tinggi, Penyusunan *Methodology* berdasarkan **DATA ASLI**.
 
 ---
 *Status: Aktif dieksekusi oleh Agent AI Antigravity.*
