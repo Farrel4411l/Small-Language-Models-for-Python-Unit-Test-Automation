@@ -32,7 +32,7 @@ Fokus: Menggabungkan Sparse + Dense untuk akurasi tinggi.
 - [ ] **2.3** Membangun *Hybrid Retriever* menggunakan algoritma *Reciprocal Rank Fusion* (RRF) (k=60 -> Top 20).
 - [ ] **2.4** Membangun layer *Reranker* dengan `bge-reranker-v2-m3` untuk memeras Top 20 -> Top 3.
 - [ ] **2.5** Pengujian Retrieval: Recall@3 ≥ 0.85 pada *gold set*.
-
+    
 ### Fase 3: Generation Pipeline
 Fokus: Integrasi Prompt RAG dengan Model Qwen2.5-7B.
 - [x] **3.1** Desain Template Prompt (*System* + *Context* + *User Query*).
